@@ -1,5 +1,8 @@
 # 🤖 Signo: Robust Hand Gesture Recognition Demo
 
+<img width="1440" height="900" alt="signo sc1" src="https://github.com/user-attachments/assets/cc5f78fc-c426-42c0-95a1-2e0a662a3396" />
+
+
 **Signo** is a real-time, interactive hand gesture recognition application built with **Streamlit**, **OpenCV**, and **MediaPipe**. It leverages a robust, custom-defined classification logic based on finger joint and tip positions to reliably identify common hand signs directly from a webcam feed.
 
 
