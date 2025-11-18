@@ -1,9 +1,9 @@
-# 🤖 Signo: Robust Hand Gesture Recognition Demo
+# 🤖 Signo: Kenya Sign Language (KSL) Sentence & Phrase Builder
 
 <img width="1440" height="900" alt="signo sc1" src="https://github.com/user-attachments/assets/cc5f78fc-c426-42c0-95a1-2e0a662a3396" />
 
 
-**Signo** is a real-time, interactive hand gesture recognition application built with **Streamlit**, **OpenCV**, and **MediaPipe**. It leverages a robust, custom-defined classification logic based on finger joint and tip positions to reliably identify common hand signs directly from a webcam feed.
+**Signo** is a real-time, interactive hand gesture recognition application designed for Kenya Sign Language (KSL). Built with **Streamlit**, **OpenCV**, and **MediaPipe**, it uses geometric classification to recognize individual letters and common phrases, enabling users to build sentences directly from webcam gestures.
 
 
 
@@ -11,25 +11,30 @@
 
 ## ✨ Features
 
+* **Sentence Building:** Combine recognized letters and phrases to build complete sentences using intuitive gestures.
+* **Phrase Recognition:** Recognizes common full words/phrases alongside individual KSL letters.
 * **Real-Time Recognition:** Processes live video from your webcam to detect and classify hand gestures instantly.
-* **Robust Classification:** Employs a relative $y$-coordinate comparison of finger landmarks (tips vs. PIP/IP joints) for gesture identification, making the system less sensitive to slight variations in hand angle and distance.
-* **Clear Visual Feedback:** Overlays MediaPipe's landmark connections onto the video feed, providing clear visualization of the hand tracking.
-* **Streamlit Interface:** Provides a simple, modern, and cross-platform web interface with an easy-to-use **Start/Stop Webcam** control.
+* **Robust Classification:** Employs geometric checks on finger joint positions for reliable gesture identification.
+* **Interactive UI:** Sidebar displays current sentence, history, and manual controls; supports light/dark theme toggle.
+* **Data Collection Mode:** Collect hand landmark data for ML model training.
+* **Visual Feedback:** Overlays MediaPipe landmarks and gesture text on live video feed.
 
 ---
 
 ## 🖐️ Supported Gestures
 
-The application is programmed to accurately distinguish between the following hand signs:
+The application recognizes KSL letters and phrases:
 
-| Gesture | Description | Classification Logic |
-| :---: | :--- | :--- |
-| **✋ Open Palm** | All fingers extended (open). | All non-thumb fingers are open. |
-| **✊ Fist** | All fingers curled (closed). | All non-thumb fingers are closed. |
-| **👍 Thumbs Up** | Thumb extended, others curled. | Thumb is open, Index/Middle are closed, and the thumb tip is high relative to the wrist. |
-| **✌️ Peace Sign** | Index and Middle fingers extended. | Index and Middle fingers are open, Ring and Pinky are closed. |
-| **🤘 Rock On / ILY** | Index and Pinky fingers extended. | Index and Pinky fingers are open, Middle and Ring are closed. |
-| **🤷 Unknown** | Any other configuration. | Default return for unclassified states. |
+**Letters:**
+- ✊ S, ✋ B, 🅰️ A, 🤟 L, ✌️ V, 🤙 Y, 🖕 I
+
+**Phrases:**
+- HELLO (Flat hand with thumb left), THANK YOU (Fist with thumb right extended)
+
+**Building Gestures:**
+- ␣ SPACE: Flat hand with thumb right (add space)
+- ⌫ DELETE: Thumb-index pinch (delete last phrase)
+- ↵ ENTER: Thumbs up (finish sentence with period)
 
 ---
 
@@ -55,10 +60,10 @@ You need **Python 3.7+** installed on your system.
     ```
 
 3.  **Run the Application:**
-    Execute the Python script using Streamlit.
+    Execute the main script using Streamlit.
 
     ```bash
-    streamlit run app.py # Replace 'app.py' with your script's filename
+    streamlit run final.py
     ```
 
     The application will launch in your default web browser (usually at `http://localhost:8501`).
