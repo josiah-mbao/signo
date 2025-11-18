@@ -91,7 +91,7 @@ def apply_theme_css():
 apply_theme_css()
 
 # --- 3. Streamlit Configuration and Layout ---
-st.set_page_config(page_title="Signo - KSL Sentence Builder", page_icon="✋", layout="wide")
+st.set_page_config(page_title="Signo - Gesture Sentence Builder", page_icon="✋", layout="wide")
 st.title("🇰🇪 Signo: KSL Sentence & Phrase Builder")
 
 col_main, col_sidebar = st.columns([4, 1.5])

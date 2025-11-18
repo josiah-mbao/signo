@@ -1,9 +1,9 @@
-# 🤖 Signo: Kenya Sign Language (KSL) Sentence & Phrase Builder
+# 🤖 Signo: Interactive Gesture-Based Sentence Builder
 
 <img width="1440" height="900" alt="signo sc1" src="https://github.com/user-attachments/assets/cc5f78fc-c426-42c0-95a1-2e0a662a3396" />
 
 
-**Signo** is a real-time, interactive hand gesture recognition application designed for Kenya Sign Language (KSL). Built with **Streamlit**, **OpenCV**, and **MediaPipe**, it uses geometric classification to recognize individual letters and common phrases, enabling users to build sentences directly from webcam gestures.
+**Signo** is a real-time, interactive hand gesture recognition application demonstrating sentence building through gesture input. Built with **Streamlit**, **OpenCV**, and **MediaPipe**, it uses geometric classification to recognize assigned hand shapes mapped to common words and phrases, enabling users to build sentences directly from webcam gestures.
 
 
 
@@ -17,24 +17,27 @@
 * **Robust Classification:** Employs geometric checks on finger joint positions for reliable gesture identification.
 * **Interactive UI:** Sidebar displays current sentence, history, and manual controls; supports light/dark theme toggle.
 * **Data Collection Mode:** Collect hand landmark data for ML model training.
-* **Visual Feedback:** Overlays MediaPipe landmarks and gesture text on live video feed.
+* **Visual Feedback:** Overlays MediaPipe landmarks, gesture text, and control hints (👍👊✋) on live video feed.
+* **Demo-Ready UI:** Polished interface with webcam overlay hints for clean presentations.
 
 ---
 
-## 🖐️ Supported Gestures
+## 🖐️ Assigned Gesture Mappings
 
-The application recognizes KSL letters and phrases:
+The application recognizes hand shapes assigned to common words and phrases for interactive sentence building (these are **not authentic KSL signs** but demo gestures for HCI education):
 
-**Letters:**
-- ✊ S, ✋ B, 🅰️ A, 🤟 L, ✌️ V, 🤙 Y, 🖕 I
+**Word Shapes:**
+- ✊ "I" (Fist), ✋ "YOU" (Flat hand), 🅰️ "AM" (A shape), 🤟 "GOOD" (L shape)
+- ✌️ "WE" (V shape), 🤙 "SEE" (Y shape), 🖕 "ME" (I shape)
 
-**Phrases:**
+**Phrase Shapes:**
 - HELLO (Flat hand with thumb left), THANK YOU (Fist with thumb right extended)
+- GOOD DAY (V shape with thumb added)
 
-**Building Gestures:**
-- ␣ SPACE: Flat hand with thumb right (add space)
-- ⌫ DELETE: Thumb-index pinch (delete last phrase)
-- ↵ ENTER: Thumbs up (finish sentence with period)
+**Control Gestures:**
+- ✋ SPACE: Flat hand with thumb right (add space between words)
+- 👊 DELETE: Thumb-index pinch (remove last word/phrase)
+- 👍 ENTER: Thumbs up (complete sentence with period)
 
 ---
 
