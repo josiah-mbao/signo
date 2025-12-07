@@ -5,6 +5,15 @@ import numpy as np
 import os
 import csv
 import time
+import matplotlib.pyplot as plt
+try:
+    from asl_trainer import ASLClassifier
+    asl_classifier = ASLClassifier()
+    asl_classifier.load_model('asl_classifier.pkl')
+    print("ASL model loaded successfully")
+except:
+    asl_classifier = None
+    print("Warning: ASL model not found, using geometric recognition")
 
 # --- 1. Constants and Setup ---
 DATA_PATH = 'KSL_dataset.csv'
@@ -92,7 +101,7 @@ apply_theme_css()
 
 # --- 3. Streamlit Configuration and Layout ---
 st.set_page_config(page_title="Signo - Gesture Sentence Builder", page_icon="✋", layout="wide")
-st.title("🇰🇪 Signo: KSL Sentence & Phrase Builder")
+st.title("Signo: ASL Sentence & Phrase Builder")
 
 col_main, col_sidebar = st.columns([4, 1.5])
 
@@ -174,7 +183,7 @@ def classify_sign_geometric(landmarks):
     if thumb_is_high and all(not fingers_open[f] for f in ['index', 'middle', 'ring', 'pinky']):
         return "↵ ENTER"
     
-    # --- Existing KSL Signs ---
+    # --- Existing ASL Signs ---
     if detect_fist(landmarks):
         if landmarks[4].y > landmarks[3].y:
             return "✊ S"
@@ -392,6 +401,60 @@ with col_sidebar:
     
     # --- Samples Metric ---
     st.metric(label="Total Data Samples Collected", value=f"{total_samples_collected:,}")
+
+    # --- Model Performance Metrics ---
+    if asl_classifier and hasattr(asl_classifier, 'model') and asl_classifier.model:
+        st.markdown("### 📊 Model Performance Metrics")
+
+        # Load evaluation data if available
+        eval_data_path = 'model_evaluation.json'
+        if os.path.exists(eval_data_path):
+            try:
+                import json
+                with open(eval_data_path, 'r') as f:
+                    eval_data = json.load(f)
+
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Test Accuracy", f"{eval_data.get('accuracy', 0):.3f}")
+                with col2:
+                    st.metric("Cross-Val Mean", f"{eval_data.get('cv_mean', 0):.3f}")
+                with col3:
+                    st.metric("Cross-Val Std", f"{eval_data.get('cv_std', 0):.3f}")
+
+                # Show confusion matrix image if available
+                if os.path.exists('confusion_matrix.png'):
+                    st.image('confusion_matrix.png', caption='Confusion Matrix', use_column_width=True)
+
+                # Show per-class accuracy
+                if 'per_class_accuracy' in eval_data:
+                    st.markdown("#### Per-Class Accuracy")
+                    classes = list(eval_data['per_class_accuracy'].keys())
+                    accuracies = list(eval_data['per_class_accuracy'].values())
+
+                    # Create a simple bar chart
+                    fig, ax = plt.subplots(figsize=(12, 6))
+                    bars = ax.bar(classes, accuracies, color='skyblue')
+                    ax.set_xlabel('ASL Letters')
+                    ax.set_ylabel('Accuracy')
+                    ax.set_title('Per-Class Accuracy')
+                    ax.set_ylim(0, 1)
+
+                    # Add value labels on bars
+                    for bar, acc in zip(bars, accuracies):
+                        height = bar.get_height()
+                        ax.text(bar.get_x() + bar.get_width()/2., height + 0.01,
+                               f'{acc:.3f}', ha='center', va='bottom')
+
+                    st.pyplot(fig)
+
+            except Exception as e:
+                st.warning(f"Could not load evaluation metrics: {e}")
+        else:
+            st.info("Model evaluation metrics will be available after training.")
+    else:
+        st.info("Load a trained model to view performance metrics.")
+
     st.markdown("---")
 
     # --- Mode Selection ---
@@ -417,7 +480,7 @@ with col_sidebar:
         
     else:  # Data Collection Mode
         st.subheader("Data Collection Setup")
-        selected_letter = st.selectbox("Select KSL Sign to Record:", KSL_LETTERS)
+        selected_letter = st.selectbox("Select ASL Sign to Record:", KSL_LETTERS)
         num_samples_to_record = st.slider(
             f"Target Samples for '{selected_letter}':",
             min_value=50, max_value=500, value=200, step=10
@@ -433,11 +496,36 @@ with col_sidebar:
 # --- 9. Main Video Feed ---
 
 with col_main:
-    st.subheader("Real-Time KSL Sentence Building")
-    
-    run = st.checkbox("Start Webcam Feed", value=False)
-    FRAME_WINDOW = st.image([])
-    
+    st.subheader("Real-Time ASL Sentence Building")
+
+    # Check if running on Streamlit Cloud (no webcam support)
+    import os
+    is_streamlit_cloud = os.getenv('STREAMLIT_SERVER_HEADLESS', 'false').lower() == 'true'
+
+    if is_streamlit_cloud:
+        st.info("🎥 **Webcam not available in browser deployment.** This demo shows the interface design.")
+        st.markdown("""
+        ### 📱 **Try the Live Demo:**
+        For full webcam functionality, run locally:
+        ```bash
+        pip install -r requirements.txt
+        streamlit run final.py
+        ```
+        """)
+
+        # Show sample interface
+        FRAME_WINDOW = st.image("https://via.placeholder.com/640x480/1E232A/FFFFFF?text=Webcam+Feed+Placeholder",
+                               caption="Sample Interface (Webcam requires local deployment)")
+
+        # Sample sentence building demo
+        st.markdown("### 🎯 Sample Sentence Building")
+        st.code("HELLO I AM GOOD")
+        st.success("✅ Sentence completed: HELLO I AM GOOD.")
+
+    else:
+        run = st.checkbox("Start Webcam Feed", value=False)
+        FRAME_WINDOW = st.image([])
+
     # Feedback container for word building actions
     FEEDBACK_CONTAINER = st.empty()
 
@@ -565,5 +653,4 @@ if cap and cap.isOpened():
 if not run:
     FRAME_WINDOW.empty()
     with col_main:
-        st.subheader("Real-Time KSL Sentence Building")
         st.info("Click 'Start Webcam Feed' to begin building sentences with gestures!")

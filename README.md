@@ -5,7 +5,16 @@
 
 **Signo** is a real-time, interactive hand gesture recognition application demonstrating sentence building through gesture input. Built with **Streamlit**, **OpenCV**, and **MediaPipe**, it uses geometric classification to recognize assigned hand shapes mapped to common words and phrases, enabling users to build sentences directly from webcam gestures.
 
+**🚀 Live Demo:** [Signo on Streamlit Cloud](https://signo.streamlit.app) *(Interface preview - webcam requires local deployment)*
 
+## 🆕 Recent Updates
+
+**Version 2.0 - Enterprise Metrics & Deployment**
+- ✅ **Advanced Model Evaluation:** Cross-validation, confusion matrices, per-class accuracy analysis
+- ✅ **Real-time Metrics Dashboard:** Interactive visualizations integrated into Streamlit UI
+- ✅ **Multi-Model Comparison:** SVM, Random Forest, and Logistic Regression support
+- ✅ **Deployment Ready:** Streamlit Cloud compatible with automatic environment detection
+- ✅ **Enhanced Documentation:** Comprehensive README with deployment guides
 
 ---
 
@@ -16,9 +25,34 @@
 * **Real-Time Recognition:** Processes live video from your webcam to detect and classify hand gestures instantly.
 * **Robust Classification:** Employs geometric checks on finger joint positions for reliable gesture identification.
 * **Interactive UI:** Sidebar displays current sentence, history, and manual controls; supports light/dark theme toggle.
-* **Data Collection Mode:** Collect hand landmark data for ML model training.
+* **Data Collection Mode:** Collect hand landmark data for ML model training with real-time feedback.
 * **Visual Feedback:** Overlays MediaPipe landmarks, gesture text, and control hints (👍👊✋) on live video feed.
 * **Demo-Ready UI:** Polished interface with webcam overlay hints for clean presentations.
+* **Enterprise Metrics:** Advanced model evaluation with confusion matrices, cross-validation, and per-class accuracy analysis.
+* **Deployment Ready:** Streamlit Cloud compatible with automatic environment detection and fallback interfaces.
+* **Multi-Model Support:** Compare SVM, Random Forest, and Logistic Regression performance.
+* **Real-Time Analytics:** Live metrics dashboard with interactive visualizations and performance tracking.
+
+---
+
+## 📊 Advanced Model Performance Metrics
+
+The application now includes enterprise-grade evaluation metrics for trained ASL classifiers:
+
+### Core Metrics Dashboard
+- **Test Accuracy:** Overall model performance on held-out test data
+- **Cross-Validation Scores:** 5-fold stratified CV with mean and standard deviation
+- **Per-Class Accuracy:** Individual accuracy breakdown for all 26 ASL letters (A-Z)
+
+### Advanced Analytics
+- **Confusion Matrix:** Visual heatmap showing prediction patterns and error distributions
+- **Classification Report:** Detailed precision, recall, F1-scores, and support metrics
+- **Model Robustness:** Cross-validation confidence intervals for reliable performance estimation
+
+### Real-time Metrics Display
+- Interactive bar charts showing per-class accuracy distributions
+- Confusion matrix visualization with error pattern analysis
+- Live metrics updates integrated into the Streamlit interface
 
 ---
 
@@ -59,7 +93,7 @@ You need **Python 3.7+** installed on your system.
     The application relies on `streamlit`, `opencv-python`, and `mediapipe`.
 
     ```bash
-    pip install streamlit opencv-python mediapipe numpy
+    pip install -r requirements.txt
     ```
 
 3.  **Run the Application:**
@@ -73,13 +107,48 @@ You need **Python 3.7+** installed on your system.
 
 ---
 
+## 🚀 Deployment
+
+### Streamlit Cloud Deployment
+
+1. **Fork this repository** to your GitHub account
+
+2. **Connect to Streamlit Cloud:**
+   - Go to [share.streamlit.io](https://share.streamlit.io)
+   - Connect your GitHub account
+   - Select this repository
+   - Set main file path to `final.py`
+   - Click Deploy
+
+3. **Access your deployed app** via the provided URL
+
+**Note:** Webcam functionality is not available in Streamlit Cloud due to browser security restrictions. Users can see the interface and interact with the sentence builder controls.
+
+### Local Webcam Demo
+
+For full functionality including webcam gesture recognition:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run locally with webcam access
+streamlit run final.py
+```
+
+---
+
 ## 💻 Technology Stack
 
-* **Core Language:** Python
-* **Web Framework:** [Streamlit](https://streamlit.io/)
+* **Core Language:** Python 3.7+
+* **Web Framework:** [Streamlit](https://streamlit.io/) with custom theming and responsive UI
 * **Hand Tracking:** [Google MediaPipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
-* **Video Processing:** [OpenCV (`cv2`)](https://opencv.org/)
-* **Numerical Operations:** [NumPy](https://numpy.org/)
+* **Video Processing:** [OpenCV](https://opencv.org/) for real-time video capture and processing
+* **Numerical Operations:** [NumPy](https://numpy.org/) for efficient array operations
+* **Machine Learning:** [Scikit-learn](https://scikit-learn.org/) with SVM, Random Forest, and Logistic Regression
+* **Model Evaluation:** Advanced metrics including cross-validation, confusion matrices, and per-class analysis
+* **Data Visualization:** [Matplotlib](https://matplotlib.org/) & [Seaborn](https://seaborn.pydata.org/) for metrics visualization
+* **Data Processing:** [Pandas](https://pandas.pydata.org/) for dataset management and analysis
 
 ---
 
@@ -93,6 +162,13 @@ The core logic resides in the `is_finger_open` and `classify_gesture` functions.
 
 2.  **Gesture Mapping (`classify_gesture`):**
     This function checks the combined state (open/closed) of the four non-thumb fingers (Index, Middle, Ring, Pinky) to match them against the predefined gesture patterns. A special case is implemented for **👍 Thumbs Up** which requires both a specific finger state *and* the thumb tip to be positioned above the wrist.
+
+3.  **Model Training & Evaluation:**
+    The `asl_trainer.py` module provides comprehensive model training with:
+    - Cross-validation for robust performance estimation
+    - Confusion matrix analysis for error patterns
+    - Per-class accuracy breakdown
+    - Automatic metrics export for UI display
 
 ---
 
