@@ -5,6 +5,24 @@
 
 **Signo** is a real-time, interactive hand gesture recognition application demonstrating sentence building through gesture input. Built with **Streamlit**, **OpenCV**, and **MediaPipe**, it uses geometric classification to recognize assigned hand shapes mapped to common words and phrases, enabling users to build sentences directly from webcam gestures.
 
+## 🎯 Try It Now (2-Minute Demo)
+
+**Want to see ASL gesture recognition in action?**
+
+```bash
+git clone https://github.com/josiah-mbao/signo.git
+cd signo
+./run_app.sh
+```
+
+Then visit: **http://localhost:8503**
+
+**What you'll see:**
+- 🎥 **Real-time webcam gesture recognition**
+- ✋ **Build sentences with hand gestures** (SPACE, DELETE, ENTER)
+- 📝 **Recognize letters A-Z and phrases** (HELLO, THANK YOU, etc.)
+- 🎨 **Interactive UI with theme toggle**
+
 **🚀 Live Demo:** [Signo on Streamlit Cloud](https://signo.streamlit.app) *(Interface preview - webcam requires local deployment)*
 
 ## 🆕 Recent Updates
