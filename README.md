@@ -105,6 +105,28 @@ You need **Python 3.7+** installed on your system.
 
     The application will launch in your default web browser (usually at `http://localhost:8501`).
 
+### 🚀 Quick Start (Single Command)
+
+For the easiest setup, use the automated script that handles everything:
+
+```bash
+# Make sure you're in the project directory
+cd signo-gesture-recognition
+
+# Run everything with one command
+./run_app.sh
+```
+
+This script will:
+- ✅ Install ngrok if not present
+- ✅ Install Python dependencies automatically
+- ✅ Start the Streamlit application
+- ✅ Create a public ngrok tunnel
+- ✅ Display the shareable URL
+- ✅ Handle cleanup when stopped
+
+**Perfect for sharing with others!** Just give them the repository and tell them to run `./run_app.sh`.
+
 ---
 
 ## 🚀 Deployment
