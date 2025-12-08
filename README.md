@@ -111,21 +111,24 @@ For the easiest setup, use the automated script that handles everything:
 
 ```bash
 # Make sure you're in the project directory
-cd signo-gesture-recognition
+cd signo
 
-# Run everything with one command
+# Run the app locally with one command
 ./run_app.sh
 ```
 
 This script will:
-- ✅ Install ngrok if not present
 - ✅ Install Python dependencies automatically
-- ✅ Start the Streamlit application
-- ✅ Create a public ngrok tunnel
-- ✅ Display the shareable URL
-- ✅ Handle cleanup when stopped
+- ✅ Start the Streamlit application locally
+- ✅ Display the local access URL (http://localhost:8503)
 
-**Perfect for sharing with others!** Just give them the repository and tell them to run `./run_app.sh`.
+**Perfect for local development and testing!** Just run `./run_app.sh` and access at `http://localhost:8503`.
+
+For sharing with others over the internet, you'll need to use ngrok or similar tunneling service separately:
+```bash
+# After starting the app with ./run_app.sh
+ngrok http 8503  # This will give you a public URL
+```
 
 ---
 
