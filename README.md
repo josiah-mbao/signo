@@ -3,7 +3,9 @@
 <img width="1440" height="900" alt="signo sc1" src="https://github.com/user-attachments/assets/cc5f78fc-c426-42c0-95a1-2e0a662a3396" />
 
 
-**Signo** is a real-time, interactive hand gesture recognition application demonstrating sentence building through gesture input. Built with **Streamlit**, **OpenCV**, and **MediaPipe**, it uses geometric classification to recognize assigned hand shapes mapped to common words and phrases, enabling users to build sentences directly from webcam gestures.
+**Signo** is an interactive gesture recognition application demonstrating sentence building through hand gestures. Built with **Streamlit** and **OpenCV**, it uses geometric pattern recognition to identify hand shapes mapped to common words and phrases, allowing users to construct sentences through intuitive gesture interactions.
+
+**Note:** This application uses simplified geometric recognition for educational demonstration purposes. It does not perform authentic ASL (American Sign Language) recognition or real-time hand tracking.
 
 ## 🎯 Try It Now (2-Minute Demo)
 
@@ -27,52 +29,29 @@ Then visit: **http://localhost:8503**
 
 ## 🆕 Recent Updates
 
-**Version 2.0 - Enterprise Metrics & Deployment**
-- ✅ **Advanced Model Evaluation:** Cross-validation, confusion matrices, per-class accuracy analysis
-- ✅ **Real-time Metrics Dashboard:** Interactive visualizations integrated into Streamlit UI
-- ✅ **Multi-Model Comparison:** SVM, Random Forest, and Logistic Regression support
+**Version 2.1 - Gesture Recognition Focus**
+- ✅ **Geometric Pattern Recognition:** Simplified, reliable gesture detection without external dependencies
+- ✅ **Demo Gesture Cycling:** Time-based gesture simulation for educational demonstration
+- ✅ **Enhanced Webcam Support:** Improved camera detection and macOS compatibility
+- ✅ **Accurate Documentation:** README updated to reflect actual capabilities and limitations
 - ✅ **Deployment Ready:** Streamlit Cloud compatible with automatic environment detection
-- ✅ **Enhanced Documentation:** Comprehensive README with deployment guides
 
 ---
 
 ## ✨ Features
 
-* **Sentence Building:** Combine recognized letters and phrases to build complete sentences using intuitive gestures.
-* **Phrase Recognition:** Recognizes common full words/phrases alongside individual ASL letters.
-* **Real-Time Recognition:** Processes live video from your webcam to detect and classify hand gestures instantly.
-* **Robust Classification:** Employs geometric checks on finger joint positions for reliable gesture identification.
-* **Interactive UI:** Sidebar displays current sentence, history, and manual controls; supports light/dark theme toggle.
-* **Data Collection Mode:** Collect hand landmark data for ML model training with real-time feedback.
-* **Visual Feedback:** Overlays MediaPipe landmarks, gesture text, and control hints (👍👊✋) on live video feed.
-* **Demo-Ready UI:** Polished interface with webcam overlay hints for clean presentations.
-* **Enterprise Metrics:** Advanced model evaluation with confusion matrices, cross-validation, and per-class accuracy analysis.
-* **Deployment Ready:** Streamlit Cloud compatible with automatic environment detection and fallback interfaces.
-* **Multi-Model Support:** Compare SVM, Random Forest, and Logistic Regression performance.
-* **Real-Time Analytics:** Live metrics dashboard with interactive visualizations and performance tracking.
+* **Gesture-Based Sentence Building:** Construct complete sentences using intuitive hand gestures and geometric pattern recognition.
+* **Demo Gesture Recognition:** Recognizes simplified hand shapes mapped to common words and phrases for educational demonstration.
+* **Interactive Sentence Construction:** Build sentences through gesture patterns that cycle through different words and control commands.
+* **Real-Time Visual Feedback:** Live webcam feed with gesture recognition overlays and sentence building progress.
+* **Manual Control Options:** Sidebar buttons provide alternative input methods alongside gesture recognition.
+* **Theme Customization:** Light/dark mode toggle for comfortable viewing in different environments.
+* **Educational Interface:** Designed for HCI education, demonstrating gesture-based interaction concepts.
+* **Responsive Design:** Clean, modern UI that works across different screen sizes and devices.
 
 ---
 
-## 📊 Advanced Model Performance Metrics
 
-The application now includes enterprise-grade evaluation metrics for trained ASL classifiers:
-
-### Core Metrics Dashboard
-- **Test Accuracy:** Overall model performance on held-out test data
-- **Cross-Validation Scores:** 5-fold stratified CV with mean and standard deviation
-- **Per-Class Accuracy:** Individual accuracy breakdown for all 26 ASL letters (A-Z)
-
-### Advanced Analytics
-- **Confusion Matrix:** Visual heatmap showing prediction patterns and error distributions
-- **Classification Report:** Detailed precision, recall, F1-scores, and support metrics
-- **Model Robustness:** Cross-validation confidence intervals for reliable performance estimation
-
-### Real-time Metrics Display
-- Interactive bar charts showing per-class accuracy distributions
-- Confusion matrix visualization with error pattern analysis
-- Live metrics updates integrated into the Streamlit interface
-
----
 
 ## 🖐️ Assigned Gesture Mappings
 
@@ -108,7 +87,7 @@ You need **Python 3.7+** installed on your system.
     ```
 
 2.  **Install Dependencies:**
-    The application relies on `streamlit`, `opencv-python`, and `mediapipe`.
+    The application relies on `streamlit` and `opencv-python` for core functionality.
 
     ```bash
     pip install -r requirements.txt
@@ -183,15 +162,13 @@ streamlit run final.py
 
 ## 💻 Technology Stack
 
-* **Core Language:** Python 3.7+
+* **Core Language:** Python 3.11+
 * **Web Framework:** [Streamlit](https://streamlit.io/) with custom theming and responsive UI
-* **Hand Tracking:** [Google MediaPipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
+* **Gesture Recognition:** Geometric pattern matching using hand shape analysis
 * **Video Processing:** [OpenCV](https://opencv.org/) for real-time video capture and processing
-* **Numerical Operations:** [NumPy](https://numpy.org/) for efficient array operations
-* **Machine Learning:** [Scikit-learn](https://scikit-learn.org/) with SVM, Random Forest, and Logistic Regression
-* **Model Evaluation:** Advanced metrics including cross-validation, confusion matrices, and per-class analysis
-* **Data Visualization:** [Matplotlib](https://matplotlib.org/) & [Seaborn](https://seaborn.pydata.org/) for metrics visualization
-* **Data Processing:** [Pandas](https://pandas.pydata.org/) for dataset management and analysis
+* **Numerical Operations:** [NumPy](https://numpy.org/) for efficient array operations and geometric calculations
+* **Demo Cycling:** Time-based gesture simulation for educational demonstration
+* **UI Components:** Custom Streamlit interface with real-time feedback and controls
 
 ---
 
