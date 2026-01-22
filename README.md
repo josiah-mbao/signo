@@ -20,7 +20,7 @@ Then visit: **http://localhost:8503**
 **What you'll see:**
 - 🎥 **Real-time webcam gesture recognition**
 - ✋ **Build sentences with hand gestures** (SPACE, DELETE, ENTER)
-- 📝 **Recognize letters A-Z and phrases** (HELLO, THANK YOU, etc.)
+- 📝 **Recognize letters A, B, I, L, S, V, Y and phrases** (HELLO, THANK YOU, GOOD DAY)
 - 🎨 **Interactive UI with theme toggle**
 
 **🚀 Live Demo:** [Signo on Streamlit Cloud](https://signo.streamlit.app) *(Interface preview - webcam requires local deployment)*
@@ -39,7 +39,7 @@ Then visit: **http://localhost:8503**
 ## ✨ Features
 
 * **Sentence Building:** Combine recognized letters and phrases to build complete sentences using intuitive gestures.
-* **Phrase Recognition:** Recognizes common full words/phrases alongside individual KSL letters.
+* **Phrase Recognition:** Recognizes common full words/phrases alongside individual ASL letters.
 * **Real-Time Recognition:** Processes live video from your webcam to detect and classify hand gestures instantly.
 * **Robust Classification:** Employs geometric checks on finger joint positions for reliable gesture identification.
 * **Interactive UI:** Sidebar displays current sentence, history, and manual controls; supports light/dark theme toggle.
@@ -76,7 +76,7 @@ The application now includes enterprise-grade evaluation metrics for trained ASL
 
 ## 🖐️ Assigned Gesture Mappings
 
-The application recognizes hand shapes assigned to common words and phrases for interactive sentence building (these are **not authentic KSL signs** but demo gestures for HCI education):
+The application recognizes hand shapes assigned to common words and phrases for interactive sentence building (these are **not authentic ASL signs** but demo gestures for HCI education):
 
 **Word Shapes:**
 - ✊ "I" (Fist), ✋ "YOU" (Flat hand), 🅰️ "AM" (A shape), 🤟 "GOOD" (L shape)

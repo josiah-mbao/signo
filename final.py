@@ -16,7 +16,7 @@ except:
     print("Warning: ASL model not found, using geometric recognition")
 
 # --- 1. Constants and Setup ---
-DATA_PATH = 'KSL_dataset.csv'
+DATA_PATH = 'asl_dataset.csv'
 KSL_LETTERS = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -109,12 +109,8 @@ col_main, col_sidebar = st.columns([4, 1.5])
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 
-hands = mp_hands.Hands(
-    static_image_mode=False,
-    max_num_hands=1,
-    min_detection_confidence=0.8,
-    min_tracking_confidence=0.6
-)
+# hands will be initialized when webcam starts
+hands = None
 
 # --- 5. Enhanced Geometric Classification with Word Building Gestures ---
 
@@ -536,8 +532,20 @@ prev_time = 0
 
 if run:
     with st.spinner("Starting webcam..."):
+        # Initialize mediapipe hands
+        try:
+            hands = mp_hands.Hands(
+                static_image_mode=False,
+                max_num_hands=1,
+                min_detection_confidence=0.8,
+                min_tracking_confidence=0.6
+            )
+        except Exception as e:
+            st.error(f"MediaPipe initialization failed: {e}. Using geometric recognition only.")
+            hands = None
+
         cap = cv2.VideoCapture(0)
-        
+
         if not cap.isOpened():
             st.error("Failed to access webcam. Check permissions and try restarting.")
             run = False
@@ -564,13 +572,16 @@ if run:
         frame = cv2.flip(frame, 1)
         
         frame.flags.writeable = False
-        result = hands.process(frame)
+        if hands:
+            result = hands.process(frame)
+        else:
+            result = None
         frame.flags.writeable = True
 
-        gesture_text = "No hand detected"
+        gesture_text = "MediaPipe not available - using geometric recognition only" if not hands else "No hand detected"
         word_feedback = None
-        
-        if result.multi_hand_landmarks:
+
+        if result and result.multi_hand_landmarks:
             for hand_landmarks in result.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(
                     frame, 
@@ -648,6 +659,7 @@ if run:
 # Cleanup
 if cap and cap.isOpened():
     cap.release()
+if hands:
     hands.close()
 
 if not run:
