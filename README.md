@@ -1,6 +1,6 @@
 # 🤖 Signo: Interactive Gesture-Based Sentence Builder
 
-<img width="1440" height="900" alt="signo sc1" src="https://github.com/user-attachments/assets/cc5f78fc-c426-42c0-95a1-2e0a662a3396" />
+<img width="1440" height="900" alt="signo sc1" src="https://github.com/user-attachments/assets/87e58fb5-4747-4da5-8e5c-bc7136a9b370" />
 
 
 **Signo** is an interactive gesture recognition application demonstrating sentence building through hand gestures. Built with **Streamlit** and **OpenCV**, it uses geometric pattern recognition to identify hand shapes mapped to common words and phrases, allowing users to construct sentences through intuitive gesture interactions.
@@ -18,6 +18,7 @@ cd signo
 ```
 
 Then visit: **http://localhost:8503**
+
 
 **What you'll see:**
 - 🎥 **Real-time webcam gesture recognition**
